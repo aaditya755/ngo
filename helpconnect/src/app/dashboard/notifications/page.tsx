@@ -85,7 +85,7 @@ export default function NotificationsPage() {
                 transition={{ delay: index * 0.04 }}
                 className={`flex items-start gap-4 px-6 py-4 ${notification.read ? "" : "bg-green-50/60"}`}
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--green-pale)] text-xs font-bold uppercase tracking-[0.16em] text-[var(--green-dark)]">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl text-xs font-bold uppercase tracking-[0.16em] text-[var(--green-dark)]" style={{ background: "var(--green-pale)" }}>
                   {(typeLabel[notification.type] ?? "Alert").slice(0, 2)}
                 </div>
                 <div className="flex-1">
@@ -95,7 +95,7 @@ export default function NotificationsPage() {
                     {typeLabel[notification.type] ?? "Alert"} • {formatDate(notification.createdAt)}
                   </p>
                 </div>
-                {!notification.read ? <div className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--green-accent)]" /> : null}
+                {!notification.read ? <div className="mt-2 h-2.5 w-2.5 rounded-full" style={{ background: "var(--green-accent)" }} /> : null}
               </motion.div>
             ))}
           </div>

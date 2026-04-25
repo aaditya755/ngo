@@ -81,19 +81,22 @@ export default function AdminPage() {
             value={emergencyZone}
             onChange={(e) => setEmergencyZone(e.target.value)}
             placeholder="Zone name"
-            className="rounded-2xl border border-[var(--green-light)] bg-[var(--green-pale)] px-4 py-3 text-sm outline-none focus:border-[var(--green-dark)]"
+                  className="rounded-2xl border border-[var(--green-light)] px-4 py-3 text-sm outline-none focus:border-[var(--green-dark)]"
+                  style={{ background: "var(--green-pale)" }}
           />
           <input
             value={emergencyMessage}
             onChange={(e) => setEmergencyMessage(e.target.value)}
             placeholder="Emergency message"
-            className="rounded-2xl border border-[var(--green-light)] bg-[var(--green-pale)] px-4 py-3 text-sm outline-none focus:border-[var(--green-dark)]"
+                  className="rounded-2xl border border-[var(--green-light)] px-4 py-3 text-sm outline-none focus:border-[var(--green-dark)]"
+                  style={{ background: "var(--green-pale)" }}
           />
         </div>
-        <button
-          onClick={declareEmergency}
-          className="mt-4 rounded-full bg-[var(--red-soft)] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-red-200/40 hover:-translate-y-0.5"
-        >
+          <button
+            onClick={declareEmergency}
+            className="mt-4 rounded-full px-5 py-3 text-sm font-bold text-white shadow-lg shadow-red-200/40 hover:-translate-y-0.5"
+            style={{ background: "var(--red-soft)" }}
+          >
           Declare Emergency
         </button>
       </div>
@@ -120,7 +123,7 @@ export default function AdminPage() {
                 transition={{ delay: index * 0.03 }}
                 className="flex flex-col gap-3 px-6 py-4 md:flex-row md:items-center"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--green-dark)] text-sm font-bold text-white">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl text-sm font-bold text-white" style={{ background: "var(--green-dark)" }}>
                   {user.name?.[0]?.toUpperCase() ?? "?"}
                 </div>
                 <div className="min-w-0 flex-1">
@@ -130,7 +133,8 @@ export default function AdminPage() {
                 <select
                   value={user.role}
                   onChange={(e) => updateRole(user.id, e.target.value)}
-                  className="rounded-xl border border-[var(--green-light)] bg-[var(--green-pale)] px-3 py-2 text-sm text-[var(--ink)] outline-none"
+                    className="rounded-xl border border-[var(--green-light)] px-3 py-2 text-sm text-[var(--ink)] outline-none"
+                    style={{ background: "var(--green-pale)" }}
                 >
                   {["ADMIN", "NGO_COORDINATOR", "FIELD_WORKER", "VOLUNTEER", "DONOR"].map((role) => (
                     <option key={role} value={role}>

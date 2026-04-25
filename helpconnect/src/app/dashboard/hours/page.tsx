@@ -37,7 +37,7 @@ export default function HoursPage() {
           </h1>
           <p className="mt-2 text-sm leading-7 text-[var(--muted)]">Log and review your volunteer hours.</p>
         </div>
-        <button className="rounded-full bg-[var(--green-dark)] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-200/50 hover:-translate-y-0.5">
+          <button className="rounded-full px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-200/50 hover:-translate-y-0.5" style={{ background: "var(--green-dark)" }}>
           <span className="inline-flex items-center gap-2">
             <Plus size={16} />
             Log Hours
@@ -68,7 +68,7 @@ export default function HoursPage() {
                 transition={{ delay: index * 0.05 }}
                 className="flex items-center gap-4 px-6 py-4"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--green-pale)] text-[var(--green-dark)]">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl text-[var(--green-dark)]" style={{ background: "var(--green-pale)" }}>
                   <Clock size={18} />
                 </div>
                 <div className="flex-1">

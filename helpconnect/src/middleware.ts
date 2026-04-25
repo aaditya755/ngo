@@ -1,14 +1,20 @@
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import { getDashboardPathForRole, getRequiredRoleForDashboardPath } from "@/lib/roles";
 
 export default withAuth(
   function middleware(req) {
     const { pathname } = req.nextUrl;
     const role = req.nextauth.token?.role as string | undefined;
+    const correctDashboard = getDashboardPathForRole(role);
+    const requiredRole = getRequiredRoleForDashboardPath(pathname);
 
-    // Admin-only
-    if (pathname.startsWith("/dashboard/admin") && role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
+    if (pathname === "/dashboard") {
+      return NextResponse.redirect(new URL(correctDashboard, req.url));
+    }
+
+    if (requiredRole && role !== requiredRole) {
+      return NextResponse.redirect(new URL(correctDashboard, req.url));
     }
 
     return NextResponse.next();
@@ -17,14 +23,21 @@ export default withAuth(
     callbacks: {
       authorized({ token, req }) {
         const { pathname } = req.nextUrl;
-        // Public paths don't need auth
-        if (pathname === "/" || pathname.startsWith("/news") || pathname.startsWith("/login") || pathname.startsWith("/register") || pathname.startsWith("/api/auth")) {
+
+        if (
+          pathname === "/" ||
+          pathname.startsWith("/news") ||
+          pathname.startsWith("/login") ||
+          pathname.startsWith("/register") ||
+          pathname.startsWith("/api/auth")
+        ) {
           return true;
         }
+
         return !!token;
       },
     },
-  }
+  },
 );
 
 export const config = {

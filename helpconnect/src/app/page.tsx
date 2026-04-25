@@ -97,7 +97,7 @@ export default function LandingPage() {
     <div className="page-shell min-h-screen overflow-x-hidden">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--green-dark)] shadow-lg shadow-emerald-900/15">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl shadow-lg shadow-emerald-900/15" style={{ background: "var(--green-dark)" }}>
             <Heart size={18} className="text-white" />
           </div>
           <div>
@@ -115,7 +115,8 @@ export default function LandingPage() {
           </Link>
           <Link
             href="/register"
-            className="button-shine rounded-full bg-[linear-gradient(135deg,var(--green-dark),var(--green-accent))] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 hover:-translate-y-0.5"
+                className="button-shine rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 hover:-translate-y-0.5"
+                style={{ background: "linear-gradient(135deg, var(--green-dark), var(--green-accent))" }}
           >
             Get Started
           </Link>
@@ -157,7 +158,8 @@ export default function LandingPage() {
               <Link
                 href="/register"
                 id="hero-register-btn"
-                className="button-shine inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,var(--green-dark),var(--green-accent))] px-7 py-4 text-base font-bold text-white shadow-xl shadow-emerald-900/20 hover:-translate-y-1"
+              className="button-shine inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-bold text-white shadow-xl shadow-emerald-900/20 hover:-translate-y-1"
+              style={{ background: "linear-gradient(135deg, var(--green-dark), var(--green-accent))" }}
               >
                 Launch Your Workspace <ArrowRight size={18} />
               </Link>
@@ -200,7 +202,7 @@ export default function LandingPage() {
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-3xl bg-[var(--green-dark)] p-5 text-white shadow-lg shadow-emerald-900/20">
+              <div className="rounded-3xl p-5 text-white shadow-lg shadow-emerald-900/20" style={{ background: "var(--green-dark)" }}>
                   <p className="text-sm text-white/70">Critical needs</p>
                   <p className="mt-2 text-4xl font-black">08</p>
                   <p className="mt-3 text-sm text-white/80">Two zones need medical and shelter responders within the hour.</p>
@@ -220,7 +222,7 @@ export default function LandingPage() {
                 <div className="mt-4 space-y-3">
                   {previewRows.map((row, index) => (
                     <div key={row} className="flex items-start gap-3 rounded-2xl bg-white/80 px-3 py-3">
-                      <div className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--green-pale)] text-sm font-bold text-[var(--green-dark)]">
+                    <div className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold text-[var(--green-dark)]" style={{ background: "var(--green-pale)" }}>
                         {index + 1}
                       </div>
                       <p className="text-sm leading-6 text-[var(--muted)]">{row}</p>
@@ -272,7 +274,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.45, delay: index * 0.05 }}
                 className="glass group rounded-[1.75rem] p-6 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(15,92,69,0.16)]"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--green-pale)] text-[var(--green-dark)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl text-[var(--green-dark)]" style={{ background: "var(--green-pale)" }}>
                   <feature.icon size={22} />
                 </div>
                 <h3 className="mt-5 text-xl font-bold text-[var(--ink)]">{feature.title}</h3>
@@ -295,7 +297,7 @@ export default function LandingPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-[1.5rem] bg-[var(--green-dark)] p-5 text-white">
+              <div className="rounded-[1.5rem] p-5 text-white" style={{ background: "var(--green-dark)" }}>
                 <Users size={22} />
                 <p className="mt-4 text-xl font-bold">Multi-role ready</p>
                 <p className="mt-2 text-sm leading-7 text-white/75">Admin, coordinator, field worker, volunteer, and donor journeys share one cohesive system.</p>
@@ -309,7 +311,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="rounded-[2rem] bg-[linear-gradient(135deg,#0d3f34,#178c61)] px-6 py-10 text-white shadow-2xl shadow-emerald-950/20 sm:px-8">
+        <section className="rounded-[2rem] px-6 py-10 text-white shadow-2xl shadow-emerald-950/20 sm:px-8" style={{ background: "linear-gradient(135deg, #0d3f34, #178c61)" }}>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-[0.26em] text-white/70">Ready to deploy</p>

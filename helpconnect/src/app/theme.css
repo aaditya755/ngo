@@ -1,4 +1,7 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
+@source not "../../.next";
+@source not "../../.next-prod";
+@source not "../../.next-release";
 
 :root {
   --font-sans: "Trebuchet MS", "Segoe UI", sans-serif;
@@ -309,4 +312,3 @@ button:disabled {
     transform: translateX(520%) rotate(20deg);
   }
 }
-

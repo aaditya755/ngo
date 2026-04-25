@@ -80,7 +80,8 @@ export default function NeedsPage() {
         <Link
           href="/dashboard/needs/new"
           id="create-need-btn"
-          className="button-shine inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,var(--green-dark),var(--green-accent))] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-900/15 hover:-translate-y-0.5"
+              className="button-shine inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-900/15 hover:-translate-y-0.5"
+              style={{ background: "linear-gradient(135deg, var(--green-dark), var(--green-accent))" }}
         >
           <Plus size={16} />
           Report Need

@@ -36,7 +36,7 @@ export function Topbar({ onMenuClick, title }: TopbarProps) {
             <span>Search needs, zones, or people</span>
           </div>
 
-          <div className="hidden items-center gap-2 rounded-full bg-[var(--green-pale)] px-3 py-2 text-xs font-semibold text-[var(--green-dark)] sm:flex">
+        <div className="hidden items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold text-[var(--green-dark)] sm:flex" style={{ background: "var(--green-pale)" }}>
             <Sparkles size={14} />
             Live sync active
           </div>
@@ -47,7 +47,7 @@ export function Topbar({ onMenuClick, title }: TopbarProps) {
           >
             <Bell size={19} />
             {notifications > 0 ? (
-              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--red-soft)] text-[10px] font-bold text-white">
+              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ background: "var(--red-soft)" }}>
                 {notifications}
               </span>
             ) : null}

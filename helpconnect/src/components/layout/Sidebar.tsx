@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
+import { getDashboardPathForRole } from "@/lib/roles";
 import {
   Bell,
   Calendar,
@@ -23,24 +24,31 @@ import {
   X,
 } from "lucide-react";
 
-const navItems = [
-  { href: "/dashboard", icon: LayoutDashboard, label: "Overview", roles: ["ALL"] },
-  { href: "/dashboard/needs", icon: ClipboardList, label: "Community Needs", roles: ["ALL"] },
-  { href: "/dashboard/map", icon: MapPin, label: "Live Map", roles: ["ALL"] },
-  { href: "/dashboard/hours", icon: MenuSquare, label: "Hours Tracking", roles: ["ALL"] },
-  { href: "/dashboard/events", icon: Calendar, label: "Events", roles: ["ALL"] },
-  { href: "/dashboard/donations", icon: DollarSign, label: "Donations", roles: ["ALL"] },
-  { href: "/dashboard/leaderboard", icon: Trophy, label: "Leaderboard", roles: ["ALL"] },
+interface NavItem {
+  href: string;
+  icon: typeof LayoutDashboard;
+  label: string;
+  roles: string[];
+}
+
+const navItems: NavItem[] = [
+  { href: "/dashboard/needs", icon: ClipboardList, label: "Community Needs", roles: ["ADMIN", "NGO_COORDINATOR"] },
+  { href: "/dashboard/assignments", icon: ClipboardList, label: "Field Tasks", roles: ["ADMIN", "FIELD_WORKER", "VOLUNTEER"] },
+  { href: "/dashboard/map", icon: MapPin, label: "Live Map", roles: ["ADMIN", "NGO_COORDINATOR", "FIELD_WORKER", "VOLUNTEER"] },
+  { href: "/dashboard/hours", icon: MenuSquare, label: "Hours Tracking", roles: ["ADMIN", "NGO_COORDINATOR", "VOLUNTEER"] },
+  { href: "/dashboard/events", icon: Calendar, label: "Events", roles: ["ADMIN", "NGO_COORDINATOR", "VOLUNTEER"] },
+  { href: "/dashboard/donations", icon: DollarSign, label: "Donations", roles: ["ADMIN", "NGO_COORDINATOR", "DONOR"] },
+  { href: "/dashboard/leaderboard", icon: Trophy, label: "Leaderboard", roles: ["ADMIN", "VOLUNTEER"] },
   {
     href: "/dashboard/volunteers",
     icon: Users,
     label: "Volunteers",
     roles: ["ADMIN", "NGO_COORDINATOR", "FIELD_WORKER"],
   },
-  { href: "/dashboard/certificates", icon: FileText, label: "Certificates", roles: ["ALL"] },
-  { href: "/dashboard/news", icon: Newspaper, label: "Field Updates", roles: ["ALL"] },
-  { href: "/dashboard/chat", icon: MessageSquare, label: "AI Assistant", roles: ["ALL"] },
-  { href: "/dashboard/notifications", icon: Bell, label: "Notifications", roles: ["ALL"] },
+  { href: "/dashboard/certificates", icon: FileText, label: "Certificates", roles: ["ADMIN", "VOLUNTEER"] },
+  { href: "/dashboard/news", icon: Newspaper, label: "Field Updates", roles: ["ADMIN", "NGO_COORDINATOR", "FIELD_WORKER", "DONOR"] },
+  { href: "/dashboard/chat", icon: MessageSquare, label: "AI Assistant", roles: ["ADMIN", "NGO_COORDINATOR", "FIELD_WORKER", "VOLUNTEER", "DONOR"] },
+  { href: "/dashboard/notifications", icon: Bell, label: "Notifications", roles: ["ADMIN", "NGO_COORDINATOR", "FIELD_WORKER", "VOLUNTEER", "DONOR"] },
   { href: "/dashboard/admin", icon: ShieldAlert, label: "Admin Panel", roles: ["ADMIN"] },
 ];
 
@@ -53,10 +61,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { data: session } = useSession();
   const role = session?.user?.role ?? "VOLUNTEER";
+  const homeHref = getDashboardPathForRole(role);
 
-  const visible = navItems.filter(
-    (item) => item.roles.includes("ALL") || item.roles.includes(role),
-  );
+  const visible = [
+    { href: homeHref, icon: LayoutDashboard, label: "Overview" },
+    ...navItems.filter((item) => item.roles.includes(role)),
+  ];
 
   return (
     <>
@@ -75,7 +85,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         )}
       >
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
-          <Link href="/dashboard" className="flex items-center gap-3">
+          <Link href={homeHref} className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/14 text-white shadow-lg shadow-emerald-950/10">
               <Heart size={18} />
             </div>
@@ -101,7 +111,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           {visible.map((item) => {
             const isActive =
               pathname === item.href ||
-              (item.href !== "/dashboard" && pathname.startsWith(item.href));
+              (item.href !== homeHref && pathname.startsWith(item.href));
 
             return (
               <Link

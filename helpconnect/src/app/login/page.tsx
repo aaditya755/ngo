@@ -1,11 +1,12 @@
 ﻿"use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Heart, Loader2, Lock, Mail, ShieldCheck } from "lucide-react";
+import { getDashboardPathForRole } from "@/lib/roles";
 
 const trustSignals = [
   "Live role-based dashboard access",
@@ -38,7 +39,8 @@ export default function LoginPage() {
       return;
     }
 
-    router.push("/dashboard");
+    const session = await getSession();
+    router.push(getDashboardPathForRole(session?.user?.role));
     router.refresh();
   };
 
@@ -91,7 +93,7 @@ export default function LoginPage() {
           className="auth-panel mx-auto w-full max-w-xl rounded-[2rem] p-6 sm:p-8"
         >
           <div className="mb-8 text-center lg:text-left">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--green-pale)] text-[var(--green-dark)] lg:mx-0">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-[var(--green-dark)] lg:mx-0" style={{ background: "var(--green-pale)" }}>
               <Heart size={24} />
             </div>
             <h1 className="mt-5 text-3xl font-black tracking-tight text-[var(--ink)]">Welcome back</h1>
@@ -117,7 +119,8 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-2xl border border-[var(--green-light)] bg-[var(--green-pale)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    className="w-full rounded-2xl border border-[var(--green-light)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    style={{ background: "var(--green-pale)" }}
                   placeholder="you@example.com"
                 />
               </div>
@@ -133,7 +136,8 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-2xl border border-[var(--green-light)] bg-[var(--green-pale)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    className="w-full rounded-2xl border border-[var(--green-light)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    style={{ background: "var(--green-pale)" }}
                   placeholder="Enter your password"
                 />
               </div>
@@ -143,14 +147,15 @@ export default function LoginPage() {
               id="login-submit"
               type="submit"
               disabled={loading}
-              className="button-shine flex w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,var(--green-dark),var(--green-accent))] py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-900/15 hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-65"
+                className="button-shine flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-900/15 hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-65"
+                style={{ background: "linear-gradient(135deg, var(--green-dark), var(--green-accent))" }}
             >
               {loading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={16} />}
               {loading ? "Signing in..." : "Sign In to Dashboard"}
             </button>
           </form>
 
-          <div className="mt-6 rounded-2xl bg-[var(--green-pale)] px-4 py-3 text-sm text-[var(--muted)]">
+              <div className="mt-6 rounded-2xl px-4 py-3 text-sm text-[var(--muted)]" style={{ background: "var(--green-pale)" }}>
             Quick demo: use <span className="font-semibold text-[var(--ink)]">vol1@helpconnect.dev</span> and <span className="font-semibold text-[var(--ink)]">vol12345</span>.
           </div>
 

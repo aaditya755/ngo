@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Heart, Loader2, Lock, Mail, User, Users } from "lucide-react";
+import { getDashboardPathForRole } from "@/lib/roles";
 
 const roles = [
   { value: "VOLUNTEER", label: "Volunteer", desc: "Join community needs directly." },
@@ -52,7 +53,7 @@ export default function RegisterPage() {
     setLoading(false);
 
     if (signInRes?.ok) {
-      router.push("/dashboard");
+      router.push(getDashboardPathForRole(form.role));
       return;
     }
 
@@ -102,7 +103,7 @@ export default function RegisterPage() {
           className="auth-panel mx-auto w-full max-w-xl rounded-[2rem] p-6 sm:p-8"
         >
           <div className="mb-8 text-center lg:text-left">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--green-pale)] text-[var(--green-dark)] lg:mx-0">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-[var(--green-dark)] lg:mx-0" style={{ background: "var(--green-pale)" }}>
               <Users size={24} />
             </div>
             <h1 className="mt-5 text-3xl font-black tracking-tight text-[var(--ink)]">Create your account</h1>
@@ -126,7 +127,8 @@ export default function RegisterPage() {
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full rounded-2xl border border-[var(--green-light)] bg-[var(--green-pale)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    className="w-full rounded-2xl border border-[var(--green-light)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    style={{ background: "var(--green-pale)" }}
                   placeholder="Aditya Kumar"
                 />
               </div>
@@ -141,7 +143,8 @@ export default function RegisterPage() {
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full rounded-2xl border border-[var(--green-light)] bg-[var(--green-pale)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    className="w-full rounded-2xl border border-[var(--green-light)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    style={{ background: "var(--green-pale)" }}
                   placeholder="you@example.com"
                 />
               </div>
@@ -157,7 +160,8 @@ export default function RegisterPage() {
                   minLength={8}
                   value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
-                  className="w-full rounded-2xl border border-[var(--green-light)] bg-[var(--green-pale)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    className="w-full rounded-2xl border border-[var(--green-light)] py-3.5 pl-11 pr-4 text-sm outline-none focus:border-[var(--green-dark)] focus:bg-white"
+                    style={{ background: "var(--green-pale)" }}
                   placeholder="Minimum 8 characters"
                 />
               </div>
@@ -191,7 +195,8 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="button-shine flex w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,var(--green-dark),var(--green-accent))] py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-900/15 hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-65"
+                className="button-shine flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-900/15 hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-65"
+                style={{ background: "linear-gradient(135deg, var(--green-dark), var(--green-accent))" }}
             >
               {loading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={16} />}
               {loading ? "Creating account..." : "Create Account"}
