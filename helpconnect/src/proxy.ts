@@ -1,9 +1,9 @@
-import { withAuth } from "next-auth/middleware";
+import { withAuth } from "next-auth/middleware"; // Note: Some versions may use "next-auth/proxy" now
 import { NextResponse } from "next/server";
 import { getDashboardPathForRole, getRequiredRoleForDashboardPath } from "@/lib/roles";
 
 export default withAuth(
-  function middleware(req) {
+  function proxy(req) { // Renamed from middleware to proxy
     const { pathname } = req.nextUrl;
     const role = req.nextauth.token?.role as string | undefined;
     const correctDashboard = getDashboardPathForRole(role);
